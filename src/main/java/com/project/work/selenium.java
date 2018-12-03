@@ -37,16 +37,7 @@ public class selenium {
     public void ConnectToWeb()throws Throwable{
         System.setProperty(webDriverName, webDriverPath);
         webDriver = null;
-
-
-
-
         webDriver = new HtmlUnitDriver();
-        /*DesiredCapabilities cap = new DesiredCapabilities();
-        cap.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-        webDriver.navigate().to(link);
-        webDriver.navigate().to("javascript:document.getElementById('overridelink').click()");*/
-
         DesiredCapabilities capabilities = DesiredCapabilities.htmlUnit();
         capabilities.setCapability("browserName","htmlunit");
         webDriver.get("");
@@ -67,8 +58,6 @@ public class selenium {
     {
         Thread.sleep(5000);
         webDriver.findElement(By.xpath(click)).click();
-
-
     }
 
     public void ClickByCSSPath() throws Throwable

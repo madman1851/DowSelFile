@@ -9,7 +9,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 
 @Configuration
-@ComponentScan(basePackages = "Cukes")
+@ComponentScan(basePackages = "com.project")
 @PropertySource("classpath:configuration.properties")
 public class SpringConfigurator {
 
