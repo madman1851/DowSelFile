@@ -1,12 +1,20 @@
 package com.project.work;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Value;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+@Service
 public class selenium {
 
     private WebDriver webDriver;
@@ -21,6 +29,8 @@ public class selenium {
     private String account;
     @Value("${LoginPass}")
     private String password;
+    @Value("${saveFilePath}")
+    private String savePath;
 
     public String click;
 
@@ -76,9 +86,17 @@ public class selenium {
 
     }
 
-    public void DownloadReports(){
+    public void DownloadReports()throws Exception{
+        DomElement file = (DomElement) webDriver.findElement(By.name(""));//.getElementByName("File");
+        InputStream inputStream = file.click().getWebResponse().getContentAsStream();
 
+        OutputStream outputStream = new FileOutputStream(new File(savePath));
+        int read = 0;
+        byte[] bytes = new byte[1024];
 
+        while ((read = inputStream.read(bytes)) != -1) {
+            outputStream.write(bytes, 0, read);
+        }
     }
 
     public void wdRun()throws Throwable{
