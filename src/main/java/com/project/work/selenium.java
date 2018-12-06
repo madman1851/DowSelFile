@@ -32,7 +32,15 @@ public class selenium {
     @Value("${saveFilePath}")
     private String savePath;
 
-    public String click;
+    public String getClick() {
+        return click;
+    }
+
+    public void setClick(String click) {
+        this.click = click;
+    }
+
+    private String click;
 
     public void ConnectToWeb()throws Throwable{
         System.setProperty(webDriverName, webDriverPath);
@@ -50,19 +58,15 @@ public class selenium {
     }
     public void Click() throws Throwable
     {
-        Thread.sleep(5000);
         webDriver.findElement(By.partialLinkText(click)).click();
-
     }
     public void ClickByXPath() throws Throwable
     {
-        Thread.sleep(5000);
         webDriver.findElement(By.xpath(click)).click();
     }
 
     public void ClickByCSSPath() throws Throwable
     {
-        Thread.sleep(5000);
         webDriver.findElement(By.cssSelector(click)).click();
     }
 
@@ -71,8 +75,15 @@ public class selenium {
         webDriver.quit();
     }
 
-    public void NavigateToReports(){
-
+    public void NavigateToReports() throws Throwable{
+        try {
+            setClick("");
+            Click();
+            setClick("");
+            Click();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void DownloadReports()throws Exception{
@@ -92,6 +103,7 @@ public class selenium {
         ConnectToWeb();
         InsertCredentials();
         NavigateToReports();
-
+        DownloadReports();
+        CloseAll();
     }
 }
