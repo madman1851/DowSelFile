@@ -74,6 +74,14 @@ public class selenium {
     {
         webDriver.quit();
     }
+    
+    public void pickFromMenu(String link) throws Throwable{
+        String menu = getClick();
+        WebElement menu = webDriver.findElement(By.xpath(menu));
+        Actions action = new Actions(webDriver);
+        action.moveToElement(menu).perform();
+        webDriver.findElement(By.linkText(link)).click();
+    }
 
     public void NavigateToReports() throws Throwable{
         try {
